@@ -151,7 +151,7 @@ export default function AboutUsPage() {
           </div>
           
           <motion.h1 
-            className="text-4xl font-light mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-purple-600 text-center relative z-10"
+            className="text-6xl sm:text-7xl font-light mb-8 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-purple-600 text-center relative z-10"
             initial={{ opacity: 0 }} 
             animate={{ opacity: 1 }}
           >
@@ -253,7 +253,7 @@ export default function AboutUsPage() {
             Our Team
           </motion.h2>
 
-          <div className="space-y-6">
+          <div className="space-y-6 mb-24">
             {[
               {
                 name: "Dr. Sarah Chen",
