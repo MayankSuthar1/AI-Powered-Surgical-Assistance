@@ -12,7 +12,7 @@ export default function Header() {
     <header className="bg-gray-900 text-white py-4 fixed w-full z-50">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link href="/" className="text-2xl font-bold text-purple-400">
-          AI Surgery
+        Vaidya Scan
         </Link>
         <nav className="hidden md:block">
           <ul className="flex space-x-4">
