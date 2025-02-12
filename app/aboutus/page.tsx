@@ -8,9 +8,26 @@ import { Particles } from "@tsparticles/react"
 import { type Container, type ISourceOptions } from "@tsparticles/engine"
 import { loadSlim } from "@tsparticles/slim"
 
+// Add new hook for detecting mobile
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768) // 768px is typical mobile breakpoint
+    }
+    checkIsMobile()
+    window.addEventListener('resize', checkIsMobile)
+    return () => window.removeEventListener('resize', checkIsMobile)
+  }, [])
+
+  return isMobile
+}
+
 export default function AboutUsPage() {
   const containerRef = useRef(null)
   const [showFooter, setShowFooter] = useState(false)
+  const isMobile = useIsMobile()
 
   const particlesInit = useCallback(async (engine: any) => {
     await loadSlim(engine)
@@ -117,6 +134,176 @@ export default function AboutUsPage() {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
   }
 
+  if (isMobile) {
+    return (
+      <div className="min-h-screen bg-gray-900 text-white overflow-y-auto">
+        {/* Mobile Hero Section */}
+        <section className="min-h-[100svh] relative px-4 py-16 flex flex-col items-center justify-center bg-gradient-to-b from-gray-900 via-purple-900/30 to-gray-900">
+          <div className="absolute inset-0 overflow-hidden">
+            <Particles
+              id="tsparticles"
+              init={particlesInit}
+              loaded={particlesLoaded}
+              options={particlesOptions}
+              className="h-full w-full"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/50 to-gray-900" />
+          </div>
+          
+          <motion.h1 
+            className="text-4xl font-light mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-purple-600 text-center relative z-10"
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }}
+          >
+            About Us
+          </motion.h1>
+        </section>
+
+        {/* Mobile Project Section */}
+        <section className="px-4 py-12 bg-gray-900">
+          <motion.h2 
+            className="text-2xl font-medium mb-6 text-center text-purple-400"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+          >
+            Vaidya Scan
+          </motion.h2>
+
+          <div className="space-y-6">
+            <div className="grid grid-cols-2 gap-2">
+              {[1, 2, 3, 4].map((i) => (
+                <motion.div
+                  key={i}
+                  whileHover={{ scale: 1.02 }}
+                  className="aspect-square"
+                >
+                  <img 
+                    src={`/project-image-${i}.jpg`}
+                    alt={`Vaidya Scan Overview ${i}`}
+                    className="rounded-lg shadow-lg object-cover w-full h-full"
+                  />
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.div 
+              className="space-y-4"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+            >
+              <p className="text-base leading-relaxed">
+                Vaidya Scan is our revolutionary project aimed at transforming cancer diagnosis and surgical planning.
+              </p>
+              <p className="text-base leading-relaxed text-purple-400 font-semibold">
+                We are driven by a clear vision to reduce cancer mortality rates.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Mobile Company Section */}
+        <section className="px-4 py-12 bg-gray-800">
+          <motion.h2 
+            className="text-2xl font-medium mb-6 text-center text-purple-400"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+          >
+            VaidyaNetra AI
+          </motion.h2>
+
+          <div className="space-y-6">
+            <div className="grid grid-cols-2 gap-2">
+              {[1, 2].map((i) => (
+                <motion.div
+                  key={i}
+                  whileHover={{ scale: 1.02 }}
+                  className="aspect-square"
+                >
+                  <img 
+                    src={`/company-image-${i}.jpg`}
+                    alt={`VaidyaNetra AI Overview ${i}`}
+                    className="rounded-lg shadow-lg object-cover w-full h-full"
+                  />
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.div 
+              className="space-y-4"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+            >
+              <p className="text-base leading-relaxed">
+                <span className="text-purple-400 font-semibold">VaidyaNetra AI</span> empowers medical professionals with visionary AI solutions.
+              </p>
+              <p className="text-base leading-relaxed">
+                Our focus is on enabling surgeons to visualize complex brain structures before surgery.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Mobile Team Section */}
+        <section className="px-4 py-12 bg-gray-900">
+          <motion.h2 
+            className="text-2xl font-medium mb-6 text-center text-purple-400"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+          >
+            Our Team
+          </motion.h2>
+
+          <div className="space-y-6">
+            {[
+              {
+                name: "Dr. Sarah Chen",
+                role: "Chief Medical Officer",
+                description: "Neurosurgeon with 15 years of experience"
+              },
+              {
+                name: "Dr. Raj Patel",
+                role: "AI Research Director",
+                description: "PhD in Computer Vision and Machine Learning"
+              },
+            ].map((member, index) => (
+              <motion.div
+                key={index}
+                className="bg-gray-800 rounded-lg p-4 shadow-lg border-l-4 border-purple-500"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+              >
+                <div className="flex items-center space-x-4">
+                  <img
+                    src={`/team-member-${index + 1}.jpg`}
+                    alt={member.name}
+                    className="w-16 h-16 rounded-full object-cover border-2 border-purple-400"
+                  />
+                  <div>
+                    <h3 className="text-lg font-semibold text-purple-400">{member.name}</h3>
+                    <p className="text-sm text-gray-400">{member.role}</p>
+                    <p className="text-sm text-gray-300 mt-1">{member.description}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* Mobile Navigation */}
+        <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-gray-800/90 backdrop-blur-sm px-4 py-2 rounded-full border border-purple-500/30 shadow-lg z-50">
+          <motion.a
+            href="/"
+            className="flex items-center space-x-2 text-purple-400"
+            whileTap={{ scale: 0.95 }}
+          >
+            <FaHome className="text-xl" />
+            <span className="text-sm font-medium">Back Home</span>
+          </motion.a>
+        </nav>
+      </div>
+    )
+  }
+
   return (
     <div 
       ref={containerRef}
@@ -141,9 +328,6 @@ export default function AboutUsPage() {
           {/* Add gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/50 to-gray-900" />
         </div>
-
-
-
 
         {/* Content with enhanced styling - Updated structure */}
         <div className="relative z-10 flex flex-col items-center justify-between h-full w-full px-4 py-20">
