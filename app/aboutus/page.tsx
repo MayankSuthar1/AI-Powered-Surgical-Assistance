@@ -280,7 +280,7 @@ export default function AboutUsPage() {
               },
               {
                 name: "Mayank Suthar",
-                role: "Junior Developer",
+                role: "Co-Founder, AI Researcher & Developer",
                 description: "I.T. Student at GEC Modasa"
               },
             ].map((member, index) => (
