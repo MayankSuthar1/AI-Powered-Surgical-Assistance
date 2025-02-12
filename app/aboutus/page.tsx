@@ -142,6 +142,7 @@ export default function AboutUsPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/50 to-gray-900" />
         </div>
 
+        {/* Navigation - Home button */}
         {/* Content with enhanced styling - Updated structure */}
         <div className="relative z-10 flex flex-col items-center justify-between h-full w-full px-4 py-20">
           <div className="flex-1 flex flex-col items-center justify-center">
