@@ -26,3 +26,40 @@ h6 {
   font-family: 'Space Grotesk', sans-serif;
 }
 
+/* Modern Dark Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b3b3b;
+  border-radius: 5px;
+  border: 2px solid #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4b4b4b;
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3b3b3b transparent;
+}
+
+/* Hide scrollbar for Chrome while maintaining functionality */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox while maintaining functionality */
+.scrollbar-hide {
+  scrollbar-width: none;
+}
+
