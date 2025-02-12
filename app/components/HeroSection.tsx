@@ -31,13 +31,7 @@ export default function HeroSection() {
         >
           Enhancing surgical precision and training with AI and 3D simulations
         </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
-          <Button href="#contact">Learn More</Button>
-        </motion.div>
+        
       </div>
     </section>
   )
