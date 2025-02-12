@@ -24,6 +24,23 @@ function useIsMobile() {
   return isMobile
 }
 
+// Add this SVG component at the top of the file after imports
+const UserIcon = () => (
+  <svg 
+    className="w-full h-full text-purple-400"
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.5}
+      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"
+    />
+  </svg>
+)
+
 export default function AboutUsPage() {
   const containerRef = useRef(null)
   const [showFooter, setShowFooter] = useState(false)
@@ -214,7 +231,7 @@ export default function AboutUsPage() {
           <div className="space-y-6">
             <div className="grid grid-cols-2 gap-2">
               {[1, 2].map((i) => (
-                <motion.div
+                <motion.div 
                   key={i}
                   whileHover={{ scale: 1.02 }}
                   className="aspect-square"
@@ -256,14 +273,14 @@ export default function AboutUsPage() {
           <div className="space-y-6 mb-24">
             {[
               {
-                name: "Dr. Sarah Chen",
-                role: "Chief Medical Officer",
-                description: "Neurosurgeon with 15 years of experience"
+                name: "Om Patel",
+                role: "Founder & CEO",
+                description: "I.T. Student at GEC Modasa"
               },
               {
-                name: "Dr. Raj Patel",
-                role: "AI Research Director",
-                description: "PhD in Computer Vision and Machine Learning"
+                name: "Mayank Suthar",
+                role: "Junior Developer",
+                description: "I.T. Student at GEC Modasa"
               },
             ].map((member, index) => (
               <motion.div
@@ -273,11 +290,23 @@ export default function AboutUsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
               >
                 <div className="flex items-center space-x-4">
-                  <img
-                    src={`/team-member-${index + 1}.jpg`}
-                    alt={member.name}
-                    className="w-16 h-16 rounded-full object-cover border-2 border-purple-400"
-                  />
+                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-purple-400 bg-gray-700 flex items-center justify-center">
+                    <img
+                      src={`/team-member-${index + 1}.jpg`}
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                        e.currentTarget.parentElement?.classList.add('p-3');
+                        const svg = document.createElement('div');
+                        svg.className = 'w-full h-full';
+                        svg.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-full h-full text-purple-400">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
+                        </svg>`;
+                        e.currentTarget.parentElement?.appendChild(svg);
+                      }}
+                    />
+                  </div>
                   <div>
                     <h3 className="text-lg font-semibold text-purple-400">{member.name}</h3>
                     <p className="text-sm text-gray-400">{member.role}</p>
@@ -577,14 +606,14 @@ export default function AboutUsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl w-full">
           {[
             {
-              name: "Dr. Sarah Chen",
-              role: "Chief Medical Officer",
-              description: "Neurosurgeon with 15 years of experience in complex brain surgeries"
+              name: "Om Patel",
+              role: "Founder & CEO",
+              description: "I.T. Student at GEC Modasa"
             },
             {
-              name: "Dr. Raj Patel",
-              role: "AI Research Director",
-              description: "PhD in Computer Vision and Machine Learning from MIT"
+              name: "Mayank Suthar",
+              role: "Junior Developer",
+              description: "I.T. Student at GEC Modasa"
             },
           ].map((member, index) => (
             <motion.div
@@ -596,11 +625,25 @@ export default function AboutUsPage() {
               whileHover={{ scale: 1.05 }}
             >
               <div className="text-center mb-4">
-                <img
-                  src={`/team-member-${index + 1}.jpg`}
-                  alt={member.name}
-                  className="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-purple-400"
-                />
+                <div className="w-32 h-32 rounded-full mx-auto mb-4 overflow-hidden border-4 border-purple-400 bg-gray-700 flex items-center justify-center">
+                  <img
+                    src={`/team-member-${index + 1}.jpg`}
+                    alt={member.name}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      target.style.display = 'none';
+                      const container = target.parentElement;
+                      if (container) {
+                        container.classList.add('p-6');
+                        const UserIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-full h-full text-purple-400">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                        </svg>`;
+                        container.insertAdjacentHTML('beforeend', UserIcon);
+                      }
+                    }}
+                  />
+                </div>
                 <h3 className="text-xl font-semibold text-purple-400">{member.name}</h3>
                 <p className="text-gray-400 font-medium">{member.role}</p>
               </div>
