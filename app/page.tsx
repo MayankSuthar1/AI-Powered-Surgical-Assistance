@@ -19,7 +19,6 @@ export default function Home() {
       <Header />
       <main className="relative w-full">
         <HeroSection />
-
         {/* Challenge Section with 3D Tilt Effect */}
         <motion.section 
           className="relative w-full py-12 md:py-20 px-4 overflow-hidden"
@@ -27,9 +26,15 @@ export default function Home() {
         >
           <div className="absolute inset-0 bg-purple-600/5 backdrop-blur-3xl"></div>
           <div className="max-w-screen-2xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 md:mb-12 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <motion.h2 
+              className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 md:mb-12 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent relative z-10"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
               The Challenge
-            </h2>
+            </motion.h2>
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <motion.div 
                 className="relative group perspective"
@@ -38,7 +43,7 @@ export default function Home() {
               >
                 <div className="relative w-full h-[400px] transform-gpu transition-transform duration-500 group-hover:rotate-y-12">
                   <img
-                    src="/brain-scan.jpg"
+                    src="/challenges_img.jpg"
                     alt="Complex head and neck anatomy"
                     className="w-full h-full object-cover rounded-2xl shadow-2xl"
                   />
@@ -130,14 +135,131 @@ export default function Home() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8 }}
               >
-                <div className="relative w-full h-[500px] rounded-2xl overflow-hidden">
-                  <img
-                    src="/workflow.jpg"
-                    alt="AI-powered surgical assistance workflow"
-                    className="w-full h-full object-cover"
+                <svg className="w-full h-[500px]" viewBox="0 0 400 400">
+                  {/* Gradient definitions */}
+                  <defs>
+                    <linearGradient id="connectingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="rgb(168, 85, 247)" stopOpacity="0.4"/>
+                      <stop offset="100%" stopColor="rgb(168, 85, 247)" stopOpacity="0.1"/>
+                    </linearGradient>
+                    <filter id="glow">
+                      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                      <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                      </feMerge>
+                    </filter>
+                  </defs>
+
+                  {/* Animated connection paths */}
+                  {[
+                    "M 200,80 C 280,80 320,140 320,200",  // Top to Right
+                    "M 320,200 C 320,260 280,320 200,320", // Right to Bottom
+                    "M 200,320 C 120,320 80,260 80,200",   // Bottom to Left
+                    "M 80,200 C 80,140 120,80 200,80"      // Left to Top
+                  ].map((path, index) => (
+                    <g key={index}>
+                      {/* Background glow path */}
+                      <motion.path
+                        d={path}
+                        fill="none"
+                        stroke="url(#connectingGradient)"
+                        strokeWidth="8"
+                        strokeLinecap="round"
+                        filter="url(#glow)"
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        animate={{ pathLength: 1, opacity: 1 }}
+                        transition={{ duration: 1.5, delay: 1 + index * 0.2 }}
+                      />
+                      {/* Animated particles along the path */}
+                      <motion.circle
+                        r="4"
+                        fill="#a855f7"
+                        filter="url(#glow)"
+                        initial={{ opacity: 0 }}
+                        animate={{
+                          opacity: [0, 1, 0],
+                          offsetDistance: ["0%", "100%"],
+                        }}
+                        transition={{
+                          duration: 2,
+                          delay: 2 + index * 0.2,
+                          repeat: Infinity,
+                          ease: "linear",
+                        }}
+                        style={{
+                          offsetPath: `path("${path}")`,
+                        }}
+                      />
+                    </g>
+                  ))}
+
+                  {/* Central pulsing circle */}
+                  <motion.circle
+                    cx="200"
+                    cy="200"
+                    r="15"
+                    className="fill-purple-500/30"
+                    initial={{ scale: 0 }}
+                    animate={{
+                      scale: [1, 1.5, 1],
+                      opacity: [0.3, 0.7, 0.3],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
-                </div>
+
+                  {/* Workflow nodes with enhanced styling */}
+                  {[
+                    { cx: 200, cy: 80, icon: "🧠", label: "AI Analysis" },
+                    { cx: 320, cy: 200, icon: "🔄", label: "Processing" },
+                    { cx: 200, cy: 320, icon: "📊", label: "Results" },
+                    { cx: 80, cy: 200, icon: "👨‍⚕️", label: "Doctor" }
+                  ].map((node, index) => (
+                    <motion.g
+                      key={index}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: index * 0.3 + 1, duration: 0.5 }}
+                      whileHover={{ scale: 1.1 }}
+                    >
+                      {/* Node background with gradient */}
+                      <circle
+                        cx={node.cx}
+                        cy={node.cy}
+                        r="35"
+                        className="fill-gray-800/80 stroke-purple-500"
+                        strokeWidth="2"
+                        filter="url(#glow)"
+                      />
+                      {/* Icon */}
+                      <text
+                        x={node.cx}
+                        y={node.cy}
+                        textAnchor="middle"
+                        dominantBaseline="middle"
+                        className="text-2xl"
+                      >
+                        {node.icon}
+                      </text>
+                      {/* Label */}
+                      <motion.text
+                        x={node.cx}
+                        y={node.cy + 50}
+                        textAnchor="middle"
+                        className="fill-gray-300 text-sm font-medium"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.3 + 1.3 }}
+                      >
+                        {node.label}
+                      </motion.text>
+                    </motion.g>
+                  ))}
+                </svg>
               </motion.div>
               <div className="space-y-8">
                 {[
