@@ -349,7 +349,7 @@ export default function AboutUsPage() {
       {/* Rest of the content */}
       <div 
         ref={containerRef}
-        className="h-screen overflow-y-auto bg-gray-900 text-white"
+        className="h-screen overflow-y-auto bg-gray-900 text-white scrollbar-hide"
         style={{ scrollSnapType: 'y mandatory' }}
       >
         {/* Section 1: Hero */}
