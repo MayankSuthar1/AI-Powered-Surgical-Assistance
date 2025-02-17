@@ -36,7 +36,6 @@ export default function ContactUsPage() {
         <div className="bg-gray-900/80 backdrop-blur-sm px-4 py-6 sticky top-0 z-50">
           <h1 className="text-4xl font-bold text-purple-400 text-center">Get in Touch</h1>
         </div>
-
         {/* Mobile Content */}
         <div className="px-4 py-6 space-y-8">
           {/* Contact Info Cards */}
