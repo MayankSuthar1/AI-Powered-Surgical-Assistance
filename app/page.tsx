@@ -1,28 +1,54 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 import Button from "./components/Button"
 import HeroSection from "./components/HeroSection"
 import { FaBrain, FaCube, FaVrCardboard, FaRobot } from "react-icons/fa"
 
+// Add mobile detection hook
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768)
+    const handleResize = () => setIsMobile(window.innerWidth < 768)
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  return isMobile
+}
+
+// Optimize fadeInUp animation
 const fadeInUp = {
-  initial: { opacity: 0, y: 60 },
+  initial: { opacity: 0, y: 20 }, // Reduced y distance
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.8 }
+  transition: { duration: 0.5 } // Reduced duration
 }
 
 export default function Home() {
+  const isMobile = useIsMobile()
+
+  // Optimize section rendering with reduced motion for mobile
+  const sectionVariants = isMobile ? {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    transition: { duration: 0.3 }
+  } : fadeInUp
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-gray-100 max-w-[100vw] overflow-x-hidden">
       <Header />
       <main className="relative w-full">
         <HeroSection />
-        {/* Challenge Section with 3D Tilt Effect */}
+        
+        {/* Challenge Section - Optimized for mobile */}
         <motion.section 
           className="relative w-full py-12 md:py-20 px-4 overflow-hidden"
-          {...fadeInUp}
+          {...sectionVariants}
         >
           <div className="absolute inset-0 bg-purple-600/5 backdrop-blur-3xl"></div>
           <div className="max-w-screen-2xl mx-auto">
@@ -35,22 +61,21 @@ export default function Home() {
             >
               The Challenge
             </motion.h2>
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
               <motion.div 
                 className="relative group perspective"
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                whileHover={isMobile ? {} : { scale: 1.02 }}
               >
-                <div className="relative w-full h-[400px] transform-gpu transition-transform duration-500 group-hover:rotate-y-12">
+                <div className="relative w-full h-[300px] md:h-[400px]">
                   <img
                     src="/challenges_img.jpg"
                     alt="Complex head and neck anatomy"
                     className="w-full h-full object-cover rounded-2xl shadow-2xl"
+                    loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent rounded-2xl"></div>
                 </div>
               </motion.div>
-              <div className="space-y-6">
+              <div className="space-y-4 md:space-y-6">
                 {[
                   "Complex anatomy in the head and neck region",
                   "Limited pre-surgical visualization",
@@ -61,13 +86,13 @@ export default function Home() {
                   <motion.div
                     key={index}
                     className="flex items-center space-x-4 bg-gray-800/50 p-4 rounded-xl backdrop-blur-sm"
-                    initial={{ opacity: 0, x: -50 }}
+                    initial={isMobile ? { opacity: 0 } : { opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ delay: isMobile ? index * 0.1 : index * 0.2 }}
                   >
                     <div className="h-2 w-2 bg-purple-500 rounded-full"></div>
-                    <p className="text-lg">{challenge}</p>
+                    <p className="text-base md:text-lg">{challenge}</p>
                   </motion.div>
                 ))}
               </div>
@@ -75,12 +100,12 @@ export default function Home() {
           </div>
         </motion.section>
 
-        {/* Solution Section with Floating Cards */}
-        <section className="py-12 md:py-20 px-4 md:px-8">
+        {/* Solution Section - Optimized for mobile */}
+        <section className="py-12 md:py-20 px-4">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 md:mb-16 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
             Our Solution
           </h2>
-          <div className="max-w-screen-2xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="max-w-screen-2xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
             {[
               {
                 icon: <FaBrain />,
@@ -106,17 +131,16 @@ export default function Home() {
               <motion.div
                 key={index}
                 className="relative group"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
+                transition={{ delay: isMobile ? index * 0.1 : index * 0.2 }}
+                whileHover={isMobile ? {} : { y: -10 }}
               >
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur opacity-30 group-hover:opacity-100 transition duration-1000"></div>
-                <div className="relative bg-gray-900 p-6 rounded-2xl h-full">
-                  <div className="text-4xl text-purple-400 mb-4">{solution.icon}</div>
-                  <h3 className="text-xl font-bold mb-2">{solution.title}</h3>
-                  <p className="text-gray-400">{solution.description}</p>
+                <div className="relative bg-gray-900 p-4 md:p-6 rounded-xl h-full">
+                  <div className="text-3xl md:text-4xl text-purple-400 mb-3 md:mb-4">{solution.icon}</div>
+                  <h3 className="text-lg md:text-xl font-bold mb-2">{solution.title}</h3>
+                  <p className="text-sm md:text-base text-gray-400">{solution.description}</p>
                 </div>
               </motion.div>
             ))}
