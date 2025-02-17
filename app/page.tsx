@@ -137,6 +137,9 @@ export default function Home() {
                 transition={{ delay: isMobile ? index * 0.1 : index * 0.2 }}
                 whileHover={isMobile ? {} : { y: -10 }}
               >
+                <div className={`absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur opacity-30 transition duration-1000 
+                  ${isMobile ? "" : "group-hover:opacity-100 group-hover:blur-md"}`}
+                ></div>
                 <div className="relative bg-gray-900 p-4 md:p-6 rounded-xl h-full">
                   <div className="text-3xl md:text-4xl text-purple-400 mb-3 md:mb-4">{solution.icon}</div>
                   <h3 className="text-lg md:text-xl font-bold mb-2">{solution.title}</h3>
