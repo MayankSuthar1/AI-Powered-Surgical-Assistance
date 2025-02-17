@@ -1,5 +1,11 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://vaidyascan.vaidyanetraai.tech'),
@@ -34,11 +40,6 @@ export const metadata: Metadata = {
       { url: '/favicon.ico' }
     ],
     apple: '/apple-touch-icon.png',
-  },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
   },
   robots: {
     index: true,
