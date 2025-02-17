@@ -48,8 +48,8 @@ export default function ContactUsPage() {
               transition={{ delay: 0.1 }}
             >
               <h2 className="text-xl font-semibold text-purple-400 mb-2">Our Office</h2>
-              <p className="text-gray-300">123 AI Surgery Lane</p>
-              <p className="text-gray-300">Innovation City, Country</p>
+              <p className="text-gray-300">GEC Modasa, Gujarat, India</p>
+              {/* <p className="text-gray-300">Gujarat, India</p> */}
             </motion.div>
 
             <motion.div 
@@ -58,18 +58,8 @@ export default function ContactUsPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
             >
-              <h2 className="text-xl font-semibold text-purple-400 mb-2">Call Us</h2>
-              <p className="text-gray-300">+123 456 7890</p>
-            </motion.div>
-
-            <motion.div 
-              className="bg-gray-800/50 backdrop-blur-sm p-4 rounded-lg border-l-4 border-purple-500"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
-            >
               <h2 className="text-xl font-semibold text-purple-400 mb-2">Email</h2>
-              <p className="text-gray-300">info@ai-surgery.com</p>
+              <p className="text-gray-300">vaidyanetraai@gmail.com</p>
             </motion.div>
           </div>
 
@@ -137,22 +127,15 @@ export default function ContactUsPage() {
             whileHover={{ scale: 1.05 }}
           >
             <h2 className="text-2xl font-semibold mb-2">Our Office</h2>
-            <p className="text-gray-300">123 AI Surgery Lane</p>
-            <p className="text-gray-300">Innovation City, Country</p>
-          </motion.div>
-          <motion.div 
-            className="p-6 bg-gray-800 rounded-xl shadow-2xl border-l-4 border-purple-500"
-            whileHover={{ scale: 1.05 }}
-          >
-            <h2 className="text-2xl font-semibold mb-2">Call Us</h2>
-            <p className="text-gray-300">+123 456 7890</p>
+            <p className="text-gray-300">GEC Modasa, Gujarat, India</p>
+            {/* <p className="text-gray-300">Gujarat, India</p> */}
           </motion.div>
           <motion.div 
             className="p-6 bg-gray-800 rounded-xl shadow-2xl border-l-4 border-purple-500"
             whileHover={{ scale: 1.05 }}
           >
             <h2 className="text-2xl font-semibold mb-2">Email</h2>
-            <p className="text-gray-300">info@ai-surgery.com</p>
+            <p className="text-gray-300">vaidyanetraai@gmail.com</p>
           </motion.div>
         </div>
         
