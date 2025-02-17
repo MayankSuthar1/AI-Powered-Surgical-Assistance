@@ -63,6 +63,7 @@ export default function Home() {
                     className="flex items-center space-x-4 bg-gray-800/50 p-4 rounded-xl backdrop-blur-sm"
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
                   >
                     <div className="h-2 w-2 bg-purple-500 rounded-full"></div>
@@ -107,6 +108,7 @@ export default function Home() {
                 className="relative group"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -10 }}
               >
@@ -273,6 +275,7 @@ export default function Home() {
                     className="relative pl-8"
                     initial={{ opacity: 0, x: 50 }}
                     whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
                     transition={{ delay: index * 0.2 }}
                   >
                     <div className="absolute left-0 top-0 w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center">
@@ -306,6 +309,7 @@ export default function Home() {
                   className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl text-center"
                   initial={{ opacity: 0, scale: 0.5 }}
                   whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                 >
                   <div className="text-3xl font-bold text-purple-400 mb-2">{stat.value}</div>
@@ -325,6 +329,7 @@ export default function Home() {
                   className="flex items-center space-x-4"
                   initial={{ opacity: 0, x: 50 }}
                   whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                 >
                   <div className="h-2 w-2 bg-purple-500 rounded-full"></div>
@@ -341,6 +346,7 @@ export default function Home() {
           className="py-12 md:py-20 px-4 md:px-8 text-center relative"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-purple-600/10 to-transparent"></div>
           <div className="relative">
