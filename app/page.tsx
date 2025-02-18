@@ -29,21 +29,29 @@ function useIsMobile() {
   return isMobile
 }
 
-// Optimize fadeInUp animation
+// Update fadeInUp animation with improved viewport options
 const fadeInUp = {
-  initial: { opacity: 0, y: 20 }, // Reduced y distance
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5 } // Reduced duration
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.3 },
+  transition: { 
+    duration: 0.5,
+    ease: "easeOut"
+  }
 }
 
 export default function Home() {
   const isMobile = useIsMobile()
 
-  // Optimize section rendering with reduced motion for mobile
+  // Update section variants
   const sectionVariants = isMobile ? {
     initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    transition: { duration: 0.3 }
+    whileInView: { opacity: 1 },
+    viewport: { once: true, amount: 0.3 },
+    transition: { 
+      duration: 0.5,
+      ease: "easeOut"
+    }
   } : fadeInUp
 
   return (

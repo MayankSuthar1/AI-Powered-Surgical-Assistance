@@ -23,12 +23,20 @@ export default function MissionSection() {
   ]
 
   return (
-    <section className="relative w-full py-12 md:py-20 px-4 md:px-0 bg-gradient-to-b from-gray-900 via-[#0c1322] to-[#0c1322]">
+    <motion.section 
+      className="relative w-full py-12 md:py-20 px-4 md:px-0 bg-gradient-to-b from-gray-900 via-[#0c1322] to-[#0c1322]"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.6 }}
+    >
       <div className="max-w-6xl mx-auto">
         <motion.h2
           className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-16"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.8 }}
+          transition={{ duration: 0.5 }}
         >
           Our Mission
         </motion.h2>
@@ -40,7 +48,12 @@ export default function MissionSection() {
               className="flex items-start space-x-3 md:space-x-4 p-4 md:p-0"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.2 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ 
+                duration: 0.5,
+                delay: index * 0.15,
+                ease: "easeOut"
+              }}
             >
               <div className="text-2xl md:text-3xl text-purple-400 mt-1">{mission.icon}</div>
               <p className="text-base md:text-lg flex-1">{mission.text}</p>
@@ -48,6 +61,6 @@ export default function MissionSection() {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }

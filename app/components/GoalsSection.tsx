@@ -27,7 +27,12 @@ export default function GoalsSection() {
   ]
 
   return (
-    <section className="relative w-full py-12 md:py-20 px-4 md:px-0 bg-gradient-to-b from-[#151c28] via-[#181f2a] to-[#181f2a]">
+    <motion.section 
+      className="relative w-full py-12 md:py-20 px-4 md:px-0 bg-gradient-to-b from-[#151c28] via-[#181f2a] to-[#181f2a]"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+    >
       <div className="absolute inset-0 bg-purple-600/5 backdrop-blur-3xl"></div>
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.h2
@@ -66,6 +71,6 @@ export default function GoalsSection() {
           </blockquote>
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   )
 }

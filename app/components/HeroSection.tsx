@@ -7,8 +7,10 @@ export default function HeroSection() {
   const { setIsHovering, setActiveCursor, mousePosition } = useCursor();
 
   return (
-    <section 
+    <motion.section 
       className="relative h-screen flex items-center justify-center bg-gradient-to-b from-black via-purple-900/10 to-black overflow-hidden cursor-hidden"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       onMouseEnter={() => setActiveCursor(true)}
       onMouseLeave={() => setActiveCursor(false)}
     >
@@ -89,7 +91,7 @@ export default function HeroSection() {
       </div>
 
       <div className="absolute bottom-0 w-full h-24 bg-gradient-to-t from-black to-transparent" />
-    </section>
+    </motion.section>
   )
 }
 
