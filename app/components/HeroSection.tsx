@@ -1,26 +1,22 @@
 "use client"
 import { motion } from "framer-motion"
 import ParticleBackground from "./ParticleBackground"
-import { useEffect, useState } from "react"
+import { useCursor } from "../context/CursorContext"
 
 export default function HeroSection() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+  const { setIsHovering, setActiveCursor, mousePosition } = useCursor();
 
   return (
-    <section className="relative h-screen flex items-center justify-center bg-gradient-to-b from-black via-purple-900/10 to-black overflow-hidden">
+    <section 
+      className="relative h-screen flex items-center justify-center bg-gradient-to-b from-black via-purple-900/10 to-black overflow-hidden cursor-hidden"
+      onMouseEnter={() => setActiveCursor(true)}
+      onMouseLeave={() => setActiveCursor(false)}
+    >
       <div className="absolute inset-0">
         <ParticleBackground />
         <div className="absolute inset-0 bg-gradient-radial from-purple-500/10 via-transparent to-transparent" 
              style={{
-               transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`,
+               transform: `translate(${mousePosition?.x * 0.02 || 0}px, ${mousePosition?.y * 0.02 || 0}px)`,
              }}
         />
         <video autoPlay loop muted className="w-full h-full object-cover opacity-40">
@@ -29,7 +25,11 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
       </div>
 
-      <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
+      <div 
+        className="relative z-10 text-center max-w-4xl mx-auto px-4"
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
+      >
         <motion.div
           initial={{ scale: 0.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}

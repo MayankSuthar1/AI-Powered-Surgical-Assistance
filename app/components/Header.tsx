@@ -4,11 +4,13 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { FaBars, FaTimes } from "react-icons/fa"
+import { useCursor } from "../context/CursorContext";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const { setIsHovering, setActiveCursor } = useCursor();
 
   useEffect(() => {
     const checkIsMobile = () => setIsMobile(window.innerWidth < 768)
@@ -26,19 +28,23 @@ export default function Header() {
 
   return (
     <header 
-      className={`fixed w-full z-50 transition-all duration-300 ${
+      className={`fixed w-full z-50 transition-all duration-300 cursor-hidden ${
         scrolled 
           ? 'py-2 bg-gray-900/95 backdrop-blur-md shadow-lg' 
           : 'py-4 bg-transparent'
       }`}
+      onMouseEnter={() => setActiveCursor(true)}
+      onMouseLeave={() => setActiveCursor(false)}
     >
       <div className="max-w-[100vw] w-full px-4 mx-auto">
         <div className="flex justify-between items-center max-w-screen-2xl mx-auto">
           {/* Logo */}
-          <Link href="/">
+          <Link href="/" className="interactive">
             <motion.div
               className="flex items-center space-x-2"
               whileHover={{ scale: 1.02 }}
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
             >
               <div className="w-8 h-8 rounded-lg bg-purple-500 flex items-center justify-center">
                 <span className="text-white font-bold">VS</span>
@@ -60,7 +66,9 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="relative px-4 py-2 rounded-lg group hover:bg-gray-800/50 transition-all duration-300"
+                className="interactive relative px-4 py-2 rounded-lg group hover:bg-gray-800/50 transition-all duration-300"
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
               >
                 <span className="relative z-10 text-gray-300 group-hover:text-purple-400 transition-colors duration-300">
                   {link.label}
@@ -76,8 +84,10 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden relative z-50 p-2 rounded-lg hover:bg-gray-800/50 transition-colors duration-300" 
+            className="interactive md:hidden relative z-50 p-2 rounded-lg hover:bg-gray-800/50 transition-colors duration-300" 
             onClick={() => setIsOpen(!isOpen)}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
             aria-label="Toggle menu"
           >
             {isOpen ? (
@@ -112,8 +122,10 @@ export default function Header() {
                 >
                   <Link
                     href={link.href}
-                    className="flex items-center space-x-2 p-3 rounded-lg hover:bg-purple-500/10 text-gray-300 hover:text-purple-400 transition-all duration-300"
+                    className="interactive flex items-center space-x-2 p-3 rounded-lg hover:bg-purple-500/10 text-gray-300 hover:text-purple-400 transition-all duration-300"
                     onClick={() => setIsOpen(false)}
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
                   >
                     <span>{link.label}</span>
                   </Link>

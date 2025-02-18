@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { CursorProvider } from './context/CursorContext'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://vaidyascan.vaidyanetraai.tech'),
@@ -95,7 +96,11 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
       </head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <CursorProvider>
+          {children}
+        </CursorProvider>
+      </body>
     </html>
   )
 }

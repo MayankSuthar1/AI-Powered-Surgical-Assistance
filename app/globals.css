@@ -106,3 +106,40 @@ main {
   animation: gradient 4s linear infinite;
 }
 
+/* Add these new cursor control styles */
+.cursor-hidden,
+.cursor-hidden * {
+  cursor: none !important;
+}
+
+.cursor-hidden a,
+.cursor-hidden button,
+.cursor-hidden [role="button"],
+.cursor-hidden .interactive {
+  cursor: none !important;
+}
+
+/* Update existing cursor classes */
+.cursor-main {
+  pointer-events: none !important;
+  z-index: 99999;
+  mix-blend-mode: exclusion;
+}
+
+/* Update cursor control styles - Remove mobile-specific rules */
+.cursor-hidden,
+.cursor-hidden * {
+  cursor: none !important;
+}
+
+.cursor-main {
+  pointer-events: none !important;
+  z-index: 99999;
+  mix-blend-mode: exclusion;
+}
+
+/* Remove these sections:
+@media (hover: hover) and (pointer: fine) {...}
+@media (hover: none) or (pointer: coarse) {...}
+*/
+

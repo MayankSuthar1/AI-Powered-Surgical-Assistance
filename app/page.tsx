@@ -13,6 +13,7 @@ import FeaturesSection from "./components/FeaturesSection"
 import AISection from "./components/AISection"
 import VisionSection from "./components/VisionSection"
 import GoalsSection from "./components/GoalsSection"
+import CustomCursor from './components/CustomCursor'
 
 // Add mobile detection hook
 function useIsMobile() {
@@ -49,6 +50,7 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-gray-100 max-w-[100vw] overflow-x-hidden">
       <Header />
       <main className="relative w-full">
+        <CustomCursor />
         <HeroSection />
         <VisionSection />
         <MissionSection />
