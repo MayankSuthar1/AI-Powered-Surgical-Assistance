@@ -41,24 +41,24 @@ export default function VisionSection() {
           Our Vision
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 md:px-0">
           {visionPoints.map((point, index) => (
             <motion.div
               key={index}
-              className="flex items-start space-x-3 md:space-x-4 bg-gray-800/50 backdrop-blur-sm p-4 md:p-6 rounded-xl border-l-4 border-purple-500"
+              className="flex flex-col md:flex-row items-start space-y-3 md:space-y-0 md:space-x-4 bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border-l-4 border-purple-500 hover:bg-gray-700/50 transition-colors"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <div className="text-2xl md:text-3xl text-purple-400 mt-1">{point.icon}</div>
-              <p className="text-base md:text-lg text-gray-300">{point.text}</p>
+              <div className="text-3xl text-purple-400">{point.icon}</div>
+              <p className="text-base md:text-lg text-gray-300 leading-relaxed">{point.text}</p>
             </motion.div>
           ))}
         </div>
 
         <motion.blockquote
-          className="mt-12 text-xl text-center text-gray-300 italic"
+          className="mt-12 text-lg md:text-xl text-center text-gray-300 italic px-4 md:px-0"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
