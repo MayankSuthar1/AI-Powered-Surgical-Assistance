@@ -4,8 +4,7 @@ import { FaBrain, FaRobot, FaGlobe } from "react-icons/fa"
 
 export default function AISection() {
   return (
-    <section className="relative w-full py-12 md:py-20 px-4 md:px-0 bg-gradient-to-b from-[#181f2a] via-[#141820] to-black">
-      <div className="absolute inset-0 bg-purple-600/5 backdrop-blur-3xl"></div>
+    <section className="relative w-full py-12 md:py-20 bg-gradient-to-b from-black via-gray-900 to-gray-900 px-4 md:px-0">
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.h2
           className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-16 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"

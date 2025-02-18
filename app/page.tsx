@@ -52,13 +52,13 @@ export default function Home() {
       <main className="relative w-full">
         <CustomCursor />
         <HeroSection />
+        <AISection />
         <VisionSection />
         <MissionSection />
         <ResearchSection />
         <ProcessSection />
         <FeaturesSection />
         <GoalsSection />
-        <AISection />
       </main>
       <Footer />
     </div>
