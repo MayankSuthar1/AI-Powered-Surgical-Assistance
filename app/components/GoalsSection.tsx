@@ -39,6 +39,7 @@ export default function GoalsSection() {
           className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-16 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
         >
           Our Goals & Future Vision
         </motion.h2>
@@ -52,6 +53,7 @@ export default function GoalsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.2 }}
               whileHover={{ scale: 1.02 }}
+              viewport={{ once: true }}
             >
               <div className="text-2xl md:text-3xl text-purple-400 mb-3 md:mb-4">{goal.icon}</div>
               <h3 className="text-lg md:text-xl font-bold mb-2 text-purple-300">{goal.title}</h3>
@@ -65,6 +67,7 @@ export default function GoalsSection() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
+          viewport={{ once: true }}
         >
           <blockquote className="text-xl text-gray-300 italic">
             "With continuous innovation, we aim to redefine cancer care and save millions of lives."
