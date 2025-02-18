@@ -29,7 +29,7 @@ export default function HeroSection() {
       </div>
 
       <div 
-        className="relative z-10 text-center max-w-4xl mx-auto px-4"
+        className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6"
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
@@ -37,7 +37,7 @@ export default function HeroSection() {
           initial={{ scale: 0.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="mb-8"
+          className="mb-4 sm:mb-8"
         >
           <motion.div
             animate={{
@@ -52,21 +52,21 @@ export default function HeroSection() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="inline-block rounded-full p-2"
+            className="inline-block rounded-full p-1 sm:p-2"
           >
-            <span className="text-purple-400 text-lg font-medium">AI-Powered Innovation</span>
+            <span className="text-purple-400 text-sm sm:text-lg font-medium">AI-Powered Innovation</span>
           </motion.div>
         </motion.div>
 
         <motion.h1
-          className="text-5xl md:text-7xl font-bold mb-6"
+          className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6"
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          Bringing Clarity to Care
+          <span className="leading-tight">Bringing Clarity to Care</span>
           <motion.span
-            className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600"
+            className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 text-2xl sm:text-4xl md:text-5xl mt-2"
             animate={{
               backgroundPosition: ["0%", "100%"],
               opacity: [0.5, 1]
@@ -82,7 +82,7 @@ export default function HeroSection() {
         </motion.h1>
 
         <motion.p
-          className="text-xl mb-8 text-gray-300"
+          className="text-base sm:text-xl mb-6 sm:mb-8 text-gray-300 max-w-[90%] mx-auto"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
