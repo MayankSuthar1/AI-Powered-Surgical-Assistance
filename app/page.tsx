@@ -1,10 +1,8 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
-import Button from "./components/Button"
 import HeroSection from "./components/HeroSection"
 import MissionSection from "./components/MissionSection"
 import ResearchSection from "./components/ResearchSection"

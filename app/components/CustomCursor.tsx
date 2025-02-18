@@ -1,4 +1,5 @@
 "use client"
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useCursor } from "../context/CursorContext";
 
@@ -29,8 +30,29 @@ export const cursorVariants = {
 
 export default function CustomCursor() {
   const { cursorX, cursorY, isHovering, isActive } = useCursor();
+  const [isHeroVisible, setIsHeroVisible] = useState(true);
 
-  if (!isActive) return null;
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsHeroVisible(entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+
+    const heroSection = document.getElementById('hero-section');
+    if (heroSection) {
+      observer.observe(heroSection);
+    }
+
+    return () => {
+      if (heroSection) {
+        observer.unobserve(heroSection);
+      }
+    };
+  }, []);
+
+  if (!isActive || !isHeroVisible) return null;
 
   return (
     <>

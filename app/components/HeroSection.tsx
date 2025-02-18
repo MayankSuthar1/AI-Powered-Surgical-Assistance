@@ -8,6 +8,7 @@ export default function HeroSection() {
 
   return (
     <motion.section 
+      id="hero-section"
       className="relative h-screen flex items-center justify-center bg-gradient-to-b from-black via-purple-900/10 to-black overflow-hidden cursor-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}

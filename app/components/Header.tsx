@@ -11,6 +11,7 @@ export default function Header() {
   const [isMobile, setIsMobile] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { setIsHovering, setActiveCursor } = useCursor();
+  const [isHeroVisible, setIsHeroVisible] = useState(true)
 
   useEffect(() => {
     const checkIsMobile = () => setIsMobile(window.innerWidth < 768)
@@ -26,15 +27,37 @@ export default function Header() {
     }
   }, [])
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsHeroVisible(entry.isIntersecting)
+      },
+      { threshold: 0 }
+    )
+
+    const heroSection = document.getElementById('hero-section')
+    if (heroSection) {
+      observer.observe(heroSection)
+    }
+
+    return () => {
+      if (heroSection) {
+        observer.unobserve(heroSection)
+      }
+    }
+  }, [])
+
   return (
     <header 
-      className={`fixed w-full z-50 transition-all duration-300 cursor-hidden ${
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        isHeroVisible ? 'cursor-hidden' : ''
+      } ${
         scrolled 
           ? 'py-2 bg-gray-900/95 backdrop-blur-md shadow-lg' 
           : 'py-4 bg-transparent'
       }`}
-      onMouseEnter={() => setActiveCursor(true)}
-      onMouseLeave={() => setActiveCursor(false)}
+      onMouseEnter={() => isHeroVisible && setActiveCursor(true)}
+      onMouseLeave={() => isHeroVisible && setActiveCursor(false)}
     >
       <div className="max-w-[100vw] w-full px-4 mx-auto">
         <div className="flex justify-between items-center max-w-screen-2xl mx-auto">
