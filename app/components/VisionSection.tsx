@@ -23,14 +23,13 @@ export default function VisionSection() {
   ]
 
   return (
-    <motion.section 
-      className="relative w-full py-20 bg-gradient-to-b from-[#0f1724] via-[#121926] to-[#121926]"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.6 }}
-    >
-      <div className="max-w-6xl mx-auto">
+    <section className="relative w-full py-20 bg-gradient-to-b from-[#0f1724] via-[#121926] to-[#121926]">
+      <motion.div 
+        className="max-w-6xl mx-auto"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+      >
         <motion.h2
           className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-16 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
           initial={{ opacity: 0, y: 20 }}
@@ -66,7 +65,7 @@ export default function VisionSection() {
         >
           "By leveraging the power of AI, medical imaging, and 3D surgical simulation, we are setting a new standard in precision-driven healthcare."
         </motion.blockquote>
-      </div>
-    </motion.section>
+      </motion.div>
+    </section>
   )
 }

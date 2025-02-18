@@ -27,14 +27,14 @@ export default function GoalsSection() {
   ]
 
   return (
-    <motion.section 
-      className="relative w-full py-12 md:py-20 px-4 md:px-0 bg-gradient-to-b from-[#151c28] via-[#181f2a] to-[#181f2a]"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-    >
+    <section className="relative w-full py-12 md:py-20 px-4 md:px-0 bg-gradient-to-b from-[#151c28] via-[#181f2a] to-[#181f2a]">
       <div className="absolute inset-0 bg-purple-600/5 backdrop-blur-3xl"></div>
-      <div className="max-w-6xl mx-auto relative z-10">
+      <motion.div 
+        className="max-w-6xl mx-auto relative z-10"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+      >
         <motion.h2
           className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-16 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
           initial={{ opacity: 0 }}
@@ -73,7 +73,7 @@ export default function GoalsSection() {
             "With continuous innovation, we aim to redefine cancer care and save millions of lives."
           </blockquote>
         </motion.div>
-      </div>
-    </motion.section>
+      </motion.div>
+    </section>
   )
 }
