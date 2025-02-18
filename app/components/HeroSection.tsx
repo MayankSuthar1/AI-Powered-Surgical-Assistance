@@ -1,50 +1,94 @@
 "use client"
-
 import { motion } from "framer-motion"
-import Button from "./Button"
+import ParticleBackground from "./ParticleBackground"
+import { useEffect, useState } from "react"
 
 export default function HeroSection() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 z-0">
-        <video autoPlay loop muted className="w-full h-full object-cover">
-          <source src="/placeholder.svg?height=1080&width=1920" type="video/mp4" />
+    <section className="relative h-screen flex items-center justify-center bg-gradient-to-b from-black via-purple-900/10 to-black overflow-hidden">
+      <div className="absolute inset-0">
+        <ParticleBackground />
+        <div className="absolute inset-0 bg-gradient-radial from-purple-500/10 via-transparent to-transparent" 
+             style={{
+               transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`,
+             }}
+        />
+        <video autoPlay loop muted className="w-full h-full object-cover opacity-40">
+          <source src="/hero-bg.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-black opacity-60"></div>
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
       </div>
-      <div className="relative z-10 text-center">
-        <motion.h1
-          className="text-5xl md:text-7xl font-bold mb-4 text-white"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+
+      <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
+        <motion.div
+          initial={{ scale: 0.5, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8 }}
+          className="mb-8"
         >
-          AI-Powered Assistance for
-          <br />
-          <span className="text-purple-400">Head and Neck Cancer Surgery</span>
+          <motion.div
+            animate={{
+              boxShadow: [
+                "0 0 0 0 rgba(168, 85, 247, 0)",
+                "0 0 0 10px rgba(168, 85, 247, 0.1)",
+                "0 0 0 20px rgba(168, 85, 247, 0)"
+              ]
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="inline-block rounded-full p-2"
+          >
+            <span className="text-purple-400 text-lg font-medium">AI-Powered Innovation</span>
+          </motion.div>
+        </motion.div>
+
+        <motion.h1
+          className="text-5xl md:text-7xl font-bold mb-6"
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          Bringing Clarity to Care
+          <motion.span
+            className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600"
+            animate={{
+              backgroundPosition: ["0%", "100%"],
+              opacity: [0.5, 1]
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              repeatType: "reverse"
+            }}
+          >
+            #DetectToDefeat
+          </motion.span>
         </motion.h1>
+
         <motion.p
           className="text-xl mb-8 text-gray-300"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          transition={{ delay: 0.6 }}
         >
-          Enhancing surgical precision and training with AI and 3D simulations
+          Harnessing AI and 3D surgical simulation to redefine neurosurgical precision
         </motion.p>
-        <motion.div
-          className="relative inline-block"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
-          <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur-lg opacity-75 group-hover:opacity-100 animate-pulse"></div>
-          <div className="relative bg-gradient-to-r from-gray-900 to-black rounded-lg px-6 py-2 ring-1 ring-purple-500/50">
-            <span className="hashtag-font bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent text-lg font-bold">
-              <i>#</i>DetectToDefeat
-            </span>
-          </div>
-        </motion.div>
       </div>
+
+      <div className="absolute bottom-0 w-full h-24 bg-gradient-to-t from-black to-transparent" />
     </section>
   )
 }

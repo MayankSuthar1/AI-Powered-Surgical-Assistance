@@ -81,3 +81,28 @@ main {
   letter-spacing: 0.05em;
 }
 
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.bg-gradient-radial {
+  background: radial-gradient(circle at center, var(--tw-gradient-from) 0%, var(--tw-gradient-to) 100%);
+}
+
+.gradient-text {
+  background-size: 200% auto;
+  animation: gradient 4s linear infinite;
+}
+
